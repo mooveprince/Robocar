@@ -25,7 +25,11 @@ $('.navbar-collapse ul li a').click(function() {
     $(this).closest('.collapse').collapse('toggle');
 });
 
-
+var pubnub = PUBNUB.init({
+　subscribe_key : 'sub-c-02c147da-aeba-11e6-8319-02ee2ddab7fe',                          
+　publish_key   : 'pub-c-30d8d010-04ed-469e-8e62-d6bec3830020'
+});
+       
 var revClick = false;
 var fwdClick = false; 
 
@@ -36,7 +40,13 @@ $('#reverse').click (function () {
 
     $('#forward').toggleClass('disabled-click', false);
     $('#forward').find('span').toggleClass('disabled-glyphicon', false);  
-    fwdClick = false;      
+    fwdClick = false;    
+
+    pubnub.publish({
+        channel: 'robo-car', 
+        message: {direction: 'REV'}
+    }); 
+
 });
 
 $('#forward').click (function () {
@@ -46,7 +56,12 @@ $('#forward').click (function () {
 
     $('#reverse').toggleClass('disabled-click', false);
     $('#reverse').find('span').toggleClass('disabled-glyphicon', false);
-    revClick = false
+    revClick = false;
+
+    pubnub.publish({
+        channel: 'robo-car', 
+        message: {direction: 'FWD'}
+    });     
 });
 
 $('#slow').click (function () {
@@ -59,5 +74,10 @@ $('#fast').click (function () {
 
 $('#stop').click (function () {
     console.log ("STOP CLICKED");
+    pubnub.publish({
+        channel: 'robo-car', 
+        message: {direction: 'STOP'}
+    }); 
+
 });
 

@@ -34,7 +34,7 @@ p {
 @media (min-width: 768px) {
   p {
     margin: 0 0 35px;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.6;
   }
 }
@@ -317,10 +317,6 @@ body {
 
 .control h3 {
   display: inline;
-}
-
-a .glyphicon-stop {
-  color: red;
 }
 
 .tool-section img {
